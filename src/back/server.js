@@ -1,13 +1,15 @@
-const { exec } = require("child_process");
-
-exec("./mai", (error, stdout, stderr) => console.log(stdout));
-
 const express = require('express')
 const app = express()
 const port = 3000
 
+// expects example - localhost:3000/?string=cos(x)^2&x=5.123
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  const { exec } = require("child_process");
+  console.log(req.query)
+  exec(`./mai "${req.query.string}" "${req.query.x}"`, (error, stdout, stderr) => {
+    console.log(stdout)
+    res.send(stdout)
+  });
 })
 
 app.listen(port, () => {
