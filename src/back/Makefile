@@ -8,10 +8,10 @@ OBJ_FILTERED := $(filter-out obj/main.o, $(OBJ))
 TARGET = qt/calc.app/Contents/MacOS/calc
 TARGET_H = smart_calc.h
 
-FLAGS_ER = -Wall -Wextra -Werror -std=c11 -pedantic -fsanitize=address
-FLAGS_GRIND = -Wall -Wextra -Werror -std=c11 -pedantic
-FLAGS_COV = -lcheck -lgcov -fprofile-arcs --coverage
-FLAGS_CHECK = -lcheck -lgcov
+FLAGS_ER = -Wall -Wextra -Werror -std=c11 -pedantic -fsanitize=address -lm
+FLAGS_GRIND = -Wall -Wextra -Werror -std=c11 -pedantic -lm
+FLAGS_COV = -lcheck -lgcov -fprofile-arcs --coverage -lm
+FLAGS_CHECK = -lcheck -lgcov -lm
 
 TMP_FILES = *.gcda *.gcno gcov_report.info *.gcda obj/*.gcno obj/*.gcda
 REST_FILES = $(TARGET) report obj/*.o ./test test.dSYM _valgrind-out.txt
