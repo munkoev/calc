@@ -7,6 +7,8 @@
 #include <string.h>
 #include <math.h>
 
+#include <sys/types.h>
+
 #define INPUT_SIZE 256
 
 /* priority - 0:0-1, 1:2-3, 2:4-6, 3:7, 4:8-16, 5:17-21 */
