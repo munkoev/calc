@@ -11,9 +11,9 @@ import {
 
 import type { ChartData, ChartOptions } from "chart.js";
 import { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { useAppSelector } from "../../app/hooks";
 import axios from "axios";
-import { addGraphSeries } from "../../app/graphSlice";
+// import { addGraphSeries } from "../../app/graphSlice";
 
 const useGraphHook = () => {
   ChartJS.register(
@@ -29,31 +29,32 @@ const useGraphHook = () => {
   const [series, setSeries] = useState([] as any[])
   useEffect(() => {
     const getSeries = async () => {
-
+      const url_encoded = 
+        `http://185.195.25.140:3000/?` + 
+        `string=${encodeURIComponent(settings.func)}`+
+        `&xmin=${settings.x_min}`+
+        `&xmax=${settings.x_max}`+
+        `&step=${settings.step}`
       const y =  await axios({
         method: 'GET',
-        url:
-          `http://185.195.25.140:3000/?` + 
-          `string=${settings.func}`+
-          `&xmin=${settings.x_min}`+
-          `&xmax=${settings.x_max}`+
-          `&step=${settings.step}`,
+        url: url_encoded,
       })
-
-      setSeries(JSON.parse(y.data));
+      setSeries(y.data.points);
     }
     getSeries();
-  }, []);
+  }, [settings]);
 
-  const dispatch = useAppDispatch();
-  const onClickDrawHandler = () => {
-    dispatch(addGraphSeries(series))
-  }
+  // const dispatch = useAppDispatch();
+  // const onClickDrawHandler = () => {
+  //   dispatch(addGraphSeries(series))
+  // }
 
   const options: ChartOptions<"line"> = {
     responsive: true,
+    
     plugins: {
       legend: {
+        display: false,
         position: "top" as const,
       },
       title: {

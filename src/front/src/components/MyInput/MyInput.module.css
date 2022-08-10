@@ -1,0 +1,23 @@
+.input_wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.label {
+
+}
+
+.input {
+
+}
+
+.wide {
+    width: 97%;
+}
+
+.narrow {
+    width: 90%;
+}
