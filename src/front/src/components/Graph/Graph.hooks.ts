@@ -39,8 +39,8 @@ const useGraphHook = () => {
           `&xmax=${settings.x_max}`+
           `&step=${settings.step}`,
       })
-      console.log(typeof y.data)
-      // setSeries(JSON.parse(y.data));
+
+      setSeries(JSON.parse(y.data));
     }
     getSeries();
   }, []);
