@@ -30,17 +30,16 @@ const useGraphHook = () => {
   useEffect(() => {
     const getSeries = async () => {
       const arr = []
-      for (let i = settings.x_min; i <= settings.x_max; i++) {
-        const y =  await axios({
-          method: 'GET',
-          url: `http://185.195.25.140:3000/?string=${settings.func}&x=${i}`,
-        })
-        arr.push([i, y])
-      }
-      setSeries(arr);
+
+      const y =  await axios({
+        method: 'GET',
+        url: `http://185.195.25.140:3000/?string=${settings.func}&xmin=${i}`,
+      })
+
+      setSeries(JSON.parse(y.data));
     }
     getSeries();
-  });
+  }, []);
 
   const dispatch = useAppDispatch();
   const onClickDrawHandler = () => {

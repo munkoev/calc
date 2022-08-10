@@ -1,14 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
-import { AxiosResponse } from "axios";
 
 const initialState = {
     settings: {
         x: 0,
-        x_min: -10,
-        x_max: 10,
-        y_min: -10,
-        y_max: 10,
+        x_min: -20,
+        x_max: 20,
+        y_min: -5,
+        y_max: 5,
         func: 'sin(x)'
     },
     points: [[0,0]]
