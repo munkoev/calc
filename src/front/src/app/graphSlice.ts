@@ -7,6 +7,7 @@ const initialState = {
         x_max: 20,
         y_min: -5,
         y_max: 5,
+        step: 1,
         func: 'sin(x)'
     },
     points: [[0,0]]

@@ -29,14 +29,18 @@ const useGraphHook = () => {
   const [series, setSeries] = useState([] as any[])
   useEffect(() => {
     const getSeries = async () => {
-      const arr = []
 
       const y =  await axios({
         method: 'GET',
-        url: `http://185.195.25.140:3000/?string=${settings.func}&xmin=${i}`,
+        url:
+          `http://185.195.25.140:3000/?` + 
+          `string=${settings.func}`+
+          `&xmin=${settings.x_min}`+
+          `&xmax=${settings.x_max}`+
+          `&step=${settings.step}`,
       })
-
-      setSeries(JSON.parse(y.data));
+      console.log(typeof y.data)
+      // setSeries(JSON.parse(y.data));
     }
     getSeries();
   }, []);
