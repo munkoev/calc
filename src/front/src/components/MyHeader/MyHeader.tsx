@@ -23,13 +23,18 @@ const MyHeader = () => {
     }, [newSettings, dispatch])
 
     return (<header className={styles.header}>
+        <div><b>Operators:</b> + - * / ^ mod ()</div>
+        <div><b>Functions:</b> sin cos tan asin acos atan sqrt sqrt log ln mod </div>
+        <div><b>Maximum number of series:</b> around 8000</div>
         <MyInput inputname={'func'} width={'wide'} callback={useInputchange} value={String(settings.func)}/>
         <div className={styles.lower_wrapper}>
             <MyInput  inputname={'x_min'} width={'narrow'} callback={useInputchange} value={String(settings.x_min)}/>
             <MyInput  inputname={'x_max'} width={'narrow'} callback={useInputchange} value={String(settings.x_max)}/>
             <MyInput  inputname={'step'} width={'narrow'} callback={useInputchange} value={String(settings.step)}/>
+            <MyInput  inputname={'y_min'} width={'narrow'} callback={useInputchange} value={String(settings.y_min)}/>
+            <MyInput  inputname={'y_max'} width={'narrow'} callback={useInputchange} value={String(settings.y_max)}/>
         </div>
-        <div className={styles.btn + ' ' + styles.noselect}>Draw</div>
+        {/* <div className={styles.btn + ' ' + styles.noselect}>Draw</div> */}
     </header>)
 }
 

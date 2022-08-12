@@ -21,7 +21,7 @@ const MyInput = (props: IMyInputProps) => {
         {props.inputname}
       </div>
       <input
-        value={props.value}
+        defaultValue={props.value}
         id={props.inputname}
         className={[
           styles.input,

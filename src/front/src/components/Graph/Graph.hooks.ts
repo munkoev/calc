@@ -27,6 +27,7 @@ const useGraphHook = () => {
   );
   const settings = useAppSelector(state => state.graph.settings)
   const [series, setSeries] = useState([] as any[])
+  const [err, setErr] = useState(false)
   useEffect(() => {
     const getSeries = async () => {
       const url_encoded = 
@@ -35,11 +36,18 @@ const useGraphHook = () => {
         `&xmin=${settings.x_min}`+
         `&xmax=${settings.x_max}`+
         `&step=${settings.step}`
-      const y =  await axios({
-        method: 'GET',
-        url: url_encoded,
-      })
-      setSeries(y.data.points);
+
+        try {
+          const y =  await axios({
+            method: 'GET',
+            url: url_encoded,
+          })
+          setSeries(y.data.points);
+          setErr(false)
+        } catch {
+          setSeries([])
+          setErr(true)
+        }
     }
     getSeries();
   }, [settings]);
@@ -51,7 +59,7 @@ const useGraphHook = () => {
 
   const options: ChartOptions<"line"> = {
     responsive: true,
-    
+    showLine: false,
     plugins: {
       legend: {
         display: false,
@@ -89,9 +97,12 @@ const useGraphHook = () => {
         position: "center",
       },
     },
+
   };
 
-  const labels = (new Array(settings.x_max - settings.x_min + 1)).map((e, i) => settings.x_min + i);
+  const labels = (new Array(
+    Math.ceil((settings.x_max - settings.x_min + 1)/settings.step)
+    )).map((e, i) => settings.x_min + i);
 
   const data: ChartData<"line"> = {
     labels,
@@ -112,7 +123,7 @@ const useGraphHook = () => {
     ],
   };
 
-  return { options, data };
+  return { options, data, err };
 };
 
 export default useGraphHook;
